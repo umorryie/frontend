@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+
+import "./App.css";
+import { getImageData } from "./dataProvider/dataProvider";
+import { CardList } from "./components/CardList/CardList";
+import { ImagePayload } from "./interfaces/imagePayload";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [imageList, setImageList] = useState<Array<ImagePayload>>([]);
+  const [page, setPage] = useState("1");
+  const [limit, setLimit] = useState("100");
+
+  useEffect(() => {
+    const setImageData = async () => {
+      const data = await getImageData(page, limit);
+      setImageList(data);
+    };
+    setImageData();
+  }, [page, limit]);
+
+  const renderListData = <CardList imageListPayloads={imageList}></CardList>;
+  return <div className="App">{renderListData}</div>;
 }
 
 export default App;
