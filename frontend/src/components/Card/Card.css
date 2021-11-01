@@ -1,0 +1,15 @@
+.hover-footer {
+  display: flex;
+  position: absolute;
+  bottom: 24px;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.author {
+  color: white;
+}
