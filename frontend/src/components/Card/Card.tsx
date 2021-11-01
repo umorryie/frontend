@@ -12,6 +12,7 @@ export const Card = ({
   download_url,
   height,
   width,
+  setFullScreenImage,
 }: ImagePayload) => {
   const [showFooter, setShowFooter] = useState(false);
 
@@ -19,6 +20,7 @@ export const Card = ({
     <div className="image-wrapper">
       <img
         src={download_url}
+        onClick={() => setFullScreenImage(download_url)}
         onMouseOver={() => setShowFooter(true)}
         onMouseLeave={() => setShowFooter(false)}
       />

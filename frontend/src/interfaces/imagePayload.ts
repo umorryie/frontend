@@ -5,8 +5,15 @@ export interface ImagePayload {
   height: number;
   url: string;
   download_url: string;
+  setFullScreenImage: Function;
 }
 
 export interface ImagePayloadData {
   imageListPayloads: ImagePayload[];
+  setFullScreenImage: Function;
+}
+
+export interface FullScreen {
+  src: string;
+  setFullScreenImage: Function;
 }

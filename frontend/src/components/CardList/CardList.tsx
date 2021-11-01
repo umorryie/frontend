@@ -4,7 +4,10 @@ import { ImagePayload, ImagePayloadData } from "../../interfaces/imagePayload";
 import { Card } from "../Card/Card";
 import "./CardList.css";
 
-export const CardList = ({ imageListPayloads }: ImagePayloadData) => {
+export const CardList = ({
+  imageListPayloads,
+  setFullScreenImage,
+}: ImagePayloadData) => {
   const [xSize, setXSize] = useState(window.innerWidth);
   const updateSize = () => setXSize(window.innerWidth);
   useEffect(() => (window.onresize = updateSize), []);
@@ -19,6 +22,7 @@ export const CardList = ({ imageListPayloads }: ImagePayloadData) => {
         {chunkedSubArray.map((imagePayload, index2) => {
           return (
             <Card
+              setFullScreenImage={setFullScreenImage}
               key={index2}
               id={imagePayload.id}
               author={imagePayload.author}
