@@ -1,5 +1,5 @@
 .hover-footer {
-  display: flex;
+  display: none;
   position: absolute;
   bottom: 24px;
   width: 100%;
@@ -8,8 +8,15 @@
 
 .image-wrapper {
   position: relative;
+  box-sizing: border-box;
+  margin-bottom: 1.45rem;
 }
 
 .author {
   color: white;
+}
+
+.image-wrapper:hover .hover-footer {
+  display: flex;
+  transition: 1s;
 }
