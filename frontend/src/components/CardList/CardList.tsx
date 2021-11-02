@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 
-import { ImagePayload, ImagePayloadData } from "../../interfaces/imagePayload";
+import {
+  ImagePayloadData,
+  ModifiedImagePayload,
+} from "../../interfaces/imagePayload";
 import { Card } from "../Card/Card";
 import "./CardList.css";
 
@@ -30,6 +33,7 @@ export const CardList = ({
               url={imagePayload.url}
               width={imagePayload.width}
               height={imagePayload.height}
+              originalDownloadUrl={imagePayload.originalDownloadUrl}
             ></Card>
           );
         })}
@@ -37,13 +41,17 @@ export const CardList = ({
     );
   });
 
-  return <div className="row">{renderedChunkedCards}</div>;
+  return (
+    <div className="container">
+      <div className="row">{renderedChunkedCards}</div>
+    </div>
+  );
 };
 
 function chunkArray(
-  myArray: Array<ImagePayload>,
+  myArray: Array<ModifiedImagePayload>,
   chunk_size: number
-): Array<Array<ImagePayload>> {
+): Array<Array<ModifiedImagePayload>> {
   const arrayLength = myArray.length;
   let tempArray = [];
 

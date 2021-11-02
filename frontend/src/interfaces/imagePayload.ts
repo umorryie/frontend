@@ -9,11 +9,15 @@ export interface ImagePayload {
 }
 
 export interface ImagePayloadData {
-  imageListPayloads: ImagePayload[];
+  imageListPayloads: ModifiedImagePayload[];
   setFullScreenImage: Function;
 }
 
 export interface FullScreen {
   src: string;
   setFullScreenImage: Function;
+}
+
+export interface ModifiedImagePayload extends ImagePayload {
+  originalDownloadUrl: string;
 }

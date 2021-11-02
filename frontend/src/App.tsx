@@ -3,12 +3,12 @@ import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import { getImageData } from "./dataProvider/dataProvider";
 import { CardList } from "./components/CardList/CardList";
-import { ImagePayload } from "./interfaces/imagePayload";
+import { ModifiedImagePayload } from "./interfaces/imagePayload";
 import { FullScreenImage } from "./components/FullScreenImage/FullScreenImage";
 
 function App() {
   const limit = 20;
-  const [imageList, setImageList] = useState<Array<ImagePayload>>([]);
+  const [imageList, setImageList] = useState<Array<ModifiedImagePayload>>([]);
   const [page, setPage] = useState(1);
   const [fullScreenImage, setFullScreenImage] = useState("");
   const loadingRef = useRef<HTMLDivElement | null>(null);
@@ -21,10 +21,10 @@ function App() {
     };
     const io = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
             setImageData();
-            io.unobserve(e.target);
+            io.unobserve(entry.target);
           }
         });
       },
