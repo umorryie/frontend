@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import {
   ImagePayloadData,
@@ -13,7 +13,7 @@ export const CardList = ({
 }: ImagePayloadData) => {
   const [xSize, setXSize] = useState(window.innerWidth);
   const updateSize = () => setXSize(window.innerWidth);
-  useEffect(() => (window.onresize = updateSize), []);
+  window.addEventListener("resize", updateSize);
 
   const chuckedArray = chunkArray(
     imageListPayloads,
