@@ -11,7 +11,11 @@ function App() {
   const [imageList, setImageList] = useState<Array<ModifiedImagePayload>>([]);
   const [page, setPage] = useState(1);
   const [fullScreenImage, setFullScreenImage] = useState("");
+  const [ySize, setYSize] = useState(window.innerHeight);
+  const updateSize = () => setYSize(window.innerHeight);
   const loadingRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => (window.onresize = updateSize), []);
 
   useEffect(() => {
     const setImageData = async () => {
@@ -28,7 +32,7 @@ function App() {
           }
         });
       },
-      { threshold: 1, rootMargin: "0px" }
+      { threshold: 0, rootMargin: `0px 0px ${(2 * ySize) / 3}px 0px` }
     );
     io.observe(loadingRef?.current as Element);
 

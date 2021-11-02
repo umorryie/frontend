@@ -17,11 +17,16 @@ export const CardList = ({
 
   const chuckedArray = chunkArray(
     imageListPayloads,
-    imageListPayloads.length / (xSize < 1100 ? 2 : 3)
+    xSize < 1076 ? 2 : xSize < 2100 ? 3 : 4
   );
   const renderedChunkedCards = chuckedArray.map((chunkedSubArray, index1) => {
     return (
-      <div className="column" key={index1}>
+      <div
+        className={
+          index1 === chuckedArray.length - 1 ? "column last-column" : "column"
+        }
+        key={index1}
+      >
         {chunkedSubArray.map((imagePayload, index2) => {
           return (
             <Card
@@ -50,15 +55,18 @@ export const CardList = ({
 
 function chunkArray(
   myArray: Array<ModifiedImagePayload>,
-  chunk_size: number
+  columnNumber: number
 ): Array<Array<ModifiedImagePayload>> {
-  const arrayLength = myArray.length;
-  let tempArray = [];
+  let tempArray: Array<Array<ModifiedImagePayload>> = [];
 
-  for (let index = 0; index < arrayLength; index += chunk_size) {
-    const myChunk = myArray.slice(index, index + chunk_size);
-    tempArray.push(myChunk);
+  for (let index = 0; index < columnNumber; index += 1) {
+    tempArray.push([]);
   }
+
+  // This creates columns without image hopping from one column to another on data fetch
+  myArray.forEach((element, index) => {
+    tempArray[index % columnNumber].push(element);
+  });
 
   return tempArray;
 }
