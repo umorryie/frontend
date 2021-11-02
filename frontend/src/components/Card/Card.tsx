@@ -1,5 +1,4 @@
-import { HiOutlineDownload } from "react-icons/all";
-
+import { RiDownloadLine } from "react-icons/all";
 import { useState } from "react";
 
 import { ImagePayload } from "../../interfaces/imagePayload";
@@ -17,13 +16,16 @@ export const Card = ({
   const [showFooter, setShowFooter] = useState(false);
 
   return (
-    <div className="image-wrapper">
+    <div
+      className="image-wrapper"
+      onMouseEnter={() => setShowFooter(true)}
+      onMouseOver={() => setShowFooter(true)}
+      onMouseLeave={() => setShowFooter(false)}
+    >
       <img
         src={download_url}
         alt={download_url}
         onClick={() => setFullScreenImage(download_url)}
-        onMouseOver={() => setShowFooter(true)}
-        onMouseLeave={() => setShowFooter(false)}
       />
       {showFooter ? (
         <div className="hover-footer">
@@ -35,7 +37,7 @@ export const Card = ({
             download
             target="_blank"
           >
-            <HiOutlineDownload color="white" />
+            <RiDownloadLine color="white" size="24px" />
           </a>
         </div>
       ) : null}
