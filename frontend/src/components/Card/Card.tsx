@@ -23,7 +23,10 @@ export const Card = ({
       onMouseLeave={() => setShowFooter(false)}
     >
       <img
+        loading="lazy"
         src={download_url}
+        width={width}
+        height={height}
         alt={download_url}
         onClick={() => setFullScreenImage(download_url)}
       />

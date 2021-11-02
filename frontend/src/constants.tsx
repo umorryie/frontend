@@ -1,4 +1,4 @@
-export const imageListUrl = (page: number, limit: string): string => {
+export const imageListUrl = (page: number, limit: number): string => {
   return `${
     process.env.IMAGE_LIST_URL
       ? process.env.IMAGE_LIST_URL

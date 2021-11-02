@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import React from "react";
+import { useEffect, useState, useRef } from "react";
 
 import "./App.css";
 import { getImageData } from "./dataProvider/dataProvider";
@@ -8,31 +7,33 @@ import { ImagePayload } from "./interfaces/imagePayload";
 import { FullScreenImage } from "./components/FullScreenImage/FullScreenImage";
 
 function App() {
-  const limit = "30";
+  const limit = 20;
   const [imageList, setImageList] = useState<Array<ImagePayload>>([]);
   const [page, setPage] = useState(1);
   const [fullScreenImage, setFullScreenImage] = useState("");
-
-  const setImageData = async () => {
-    const data = await getImageData(page, limit);
-    setImageList(imageList.concat(data));
-    setPage(page + 1);
-  };
+  const loadingRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const loader = document.querySelector(".loader");
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          setImageData();
-        }
-      });
-    });
-    io.observe(loader as Element);
+    const setImageData = async () => {
+      const data = await getImageData(page, limit);
+      setImageList(imageList.concat(data));
+      setPage(page + 1);
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setImageData();
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 1, rootMargin: "0px" }
+    );
+    io.observe(loadingRef?.current as Element);
 
     return () => {
-      io.unobserve(loader as Element);
+      io.disconnect();
     };
   }, [page]);
 
@@ -50,7 +51,7 @@ function App() {
         setFullScreenImage={setFullScreenImage}
       ></FullScreenImage>
       <div className="loader-wrapper">
-        <div className="loader"></div>
+        <div ref={loadingRef} className="loader"></div>
       </div>
     </div>
   );
