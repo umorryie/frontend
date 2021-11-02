@@ -16,6 +16,10 @@
   color: white;
 }
 
+.image-wrapper:hover {
+  cursor: pointer;
+}
+
 .image-wrapper:hover .hover-footer {
   display: flex;
   transition: 1s;
