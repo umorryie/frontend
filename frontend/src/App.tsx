@@ -7,18 +7,20 @@ import { ImagePayload } from "./interfaces/imagePayload";
 import { FullScreenImage } from "./components/FullScreenImage/FullScreenImage";
 
 function App() {
+  const limit = "30";
   const [imageList, setImageList] = useState<Array<ImagePayload>>([]);
   const [page, setPage] = useState("1");
-  const [limit, setLimit] = useState("100");
   const [fullScreenImage, setFullScreenImage] = useState("");
 
+  const setImageData = async () => {
+    const data = await getImageData(page, limit);
+    setImageList(imageList.concat(data));
+    setPage((parseInt(page) + 1).toString());
+  };
+
   useEffect(() => {
-    const setImageData = async () => {
-      const data = await getImageData(page, limit);
-      setImageList(data);
-    };
     setImageData();
-  }, [page, limit]);
+  }, []);
 
   const renderListData = (
     <CardList

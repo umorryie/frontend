@@ -20,6 +20,7 @@ export const Card = ({
     <div className="image-wrapper">
       <img
         src={download_url}
+        alt={download_url}
         onClick={() => setFullScreenImage(download_url)}
         onMouseOver={() => setShowFooter(true)}
         onMouseLeave={() => setShowFooter(false)}
@@ -28,6 +29,7 @@ export const Card = ({
         <div className="hover-footer">
           <div className="author">{author}</div>
           <a
+            rel="noreferrer"
             href={download_url}
             className="image-download"
             download
