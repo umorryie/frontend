@@ -4,7 +4,7 @@ import { imageListUrl } from "../constants";
 import { ImagePayload } from "../interfaces/imagePayload";
 
 export const getImageData = async (
-  page: string,
+  page: number,
   limit: string
 ): Promise<Array<ImagePayload>> => {
   try {
