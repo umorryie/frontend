@@ -1,13 +1,20 @@
 .container {
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, roboto, oxygen,
+    cantarell, helvetica neue, ubuntu, sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
   margin: auto;
+  min-height: 1500px;
   padding-left: 2rem;
   padding-right: 2rem;
   max-width: 1400px;
 }
 .row {
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 
 .column {
@@ -21,10 +28,10 @@
 }
 
 .column img {
-  vertical-align: middle;
+  box-sizing: border-box;
+  margin-bottom: 1.45rem;
   width: 100%;
   height: auto;
-  margin-top: 8px;
 }
 
 .last-column {
