@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import React from "react";
 
 import "./App.css";
 import { getImageData } from "./dataProvider/dataProvider";
@@ -19,8 +20,21 @@ function App() {
   };
 
   useEffect(() => {
-    setImageData();
-  }, []);
+    const loader = document.querySelector(".loader");
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          setImageData();
+        }
+      });
+    });
+    io.observe(loader as Element);
+
+    return () => {
+      io.unobserve(loader as Element);
+    };
+  }, [page]);
 
   const renderListData = (
     <CardList
@@ -35,6 +49,9 @@ function App() {
         src={fullScreenImage}
         setFullScreenImage={setFullScreenImage}
       ></FullScreenImage>
+      <div className="loader-wrapper">
+        <div className="loader"></div>
+      </div>
     </div>
   );
 }
