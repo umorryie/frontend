@@ -36,3 +36,22 @@
 .last-column {
   margin-right: 0rem;
 }
+
+@media (min-width: 1900px) {
+  .container {
+    max-width: 1850px;
+  }
+}
+
+@media (max-width: 849px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 699px) {
+  .column > * {
+    margin-right: 1rem;
+  }
+}

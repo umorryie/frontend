@@ -17,7 +17,7 @@ export const CardList = ({
 
   const chuckedArray = chunkArray(
     imageListPayloads,
-    xSize < 1076 ? 2 : xSize < 2100 ? 3 : 4
+    xSize < 1076 ? 2 : xSize < 1886 ? 3 : 4
   );
   const renderedChunkedCards = chuckedArray.map((chunkedSubArray, index1) => {
     return (
